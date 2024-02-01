@@ -6,7 +6,7 @@ services:
     image: node:latest
     working_dir: /app
     volumes:
-      - ./frontend:/app
+      - ./web_page:/app
     ports:
       - "3000:3000"  # Mapowanie portu 3000 na hosta
 
@@ -15,7 +15,8 @@ services:
     image: php:apache
     working_dir: /var/www/html
     volumes:
-      - ./backend:/var/www/html
+      - ./web_page:/var/www/html
+      - ./apache-config.conf:/etc/apache2/sites-available/000-default.conf
     depends_on:
       - mysql
     ports:
