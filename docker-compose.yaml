@@ -12,7 +12,9 @@ services:
 
   # PHP App
   backend:
-    image: php:apache
+    build:
+      context: .
+      dockerfile: Dockerfile  
     working_dir: /var/www/html
     volumes:
       - ./web_page:/var/www/html

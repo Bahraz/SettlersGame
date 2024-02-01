@@ -11,7 +11,7 @@
 
 <body>
     <h1>Settlers Game Online</h1>
-    <form action="../app/Controllers/UserController.php" method="POST">
+    <form action="../app/Controllers/login.php" method="POST">
     Login: <br/><input type="text" name="login" /><br/>
     Hasło: <br/><input type="password" name="password" /><br/><br/>
     <input type="submit" value="Zaloguj"/>
