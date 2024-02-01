@@ -5,9 +5,6 @@ require_once('./connection.php');
 $pdo_login = $_POST['login'];
 $pdo_password = $_POST['password'];
 
-$dzisiejszaData = new DateTime();
-echo $dzisiejszaData->format('Y-m-d');
-
 
 try {
     // Create new connection PDO
