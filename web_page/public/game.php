@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +8,6 @@
 </head>
 
 <body>
-    <h1>I'm working on a settler game.</h1>
-</body>
+    <h1>Witaj!</h1>
 
 </html>
