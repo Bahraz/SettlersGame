@@ -16,8 +16,9 @@
     Hasło: <br/><input type="password" name="password" /><br/><br/>
     <input type="submit" value="Zaloguj"/>
     </form>
-
-
+    <br/>
+    Nie masz konta? Zarejestruj się<br/><br/>
+    <a href="./registration.php"><input type="submit" value="Rejestracja"/></a>
 
 
 </html>
