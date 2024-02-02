@@ -1,4 +1,18 @@
 <?php
+    session_start();
+    if(isset($_SESSION['id_player'] ))
+    {
+        session_write_close();
+        header('Location: ../../game.php');
+        exit();
+    }
+
+
+    if (!isset($_POST['login']) || !isset($_POST['password'])) {
+        session_write_close();
+        header('Location: ../../index.php');
+        exit();
+    }
 
 require_once('./connection.php');
 
@@ -25,11 +39,14 @@ try {
     // Check if the user exists and verify the password
     if ($user_data && password_verify($pdo_password, $user_data['password'])) {
        //TODO: Save session player (add more information about player)
+       if (session_status() == PHP_SESSION_NONE) {
+        // Start the session
         session_start();
+    }
+    
         $_SESSION['id_player'] = $user_data['id_player'];
         $_SESSION['login'] = $user_data['login'];
 
-        $pdo_connection = null;
 
         header('Location: ../../game.php');
 
