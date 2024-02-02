@@ -1,3 +1,6 @@
+<?php
+    session_start();
+    ?>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -8,6 +11,9 @@
 </head>
 
 <body>
-    <h1>Witaj!</h1>
-
+    <h1>Witaj w grze!</h1>
+    <?php
+    echo "<p>Witaj ".$_SESSION['id'].$_SESSION['login']."!";
+    ?>
+    
 </html>
