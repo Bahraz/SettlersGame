@@ -1,4 +1,17 @@
 <?php
+session_start();
+if(isset($_SESSION['id_player'] ))
+{
+    session_write_close();
+    header('Location: ../../game.php');
+    exit();
+}
+
+if (!isset($_POST['login']) || !isset($_POST['password']) || !isset($_POST['email'])) {
+    session_write_close();
+    header('Location: ../../index.php');
+    exit();
+}
 
 require_once('./connection.php');
 
@@ -33,10 +46,11 @@ try {
         exit();
     } else {
         // Tworzenie zapytania rejestracyjnego
-        $register_query = $pdo_connection->prepare("INSERT INTO players (login, password, email, create_date) VALUES (:pdo_login, :pdo_hashpassword, :pdo_email, $register_date)");
+        $register_query = $pdo_connection->prepare("INSERT INTO players (login, password, email, create_date) VALUES (:pdo_login, :pdo_hashpassword, :pdo_email, :pdo_register_date)");
         $register_query->bindParam(':pdo_login', $pdo_login, PDO::PARAM_STR);
         $register_query->bindParam(':pdo_hashpassword', $pdo_hashpassword, PDO::PARAM_STR);
         $register_query->bindParam(':pdo_email', $pdo_email, PDO::PARAM_STR);
+        $register_query->bindParam(':pdo_register_date', $register_date, PDO::PARAM_STR);
 
         //TODO: Dodanie użytkownika do bazy danych i przejście do formularza logowania.
         $register_query->execute();

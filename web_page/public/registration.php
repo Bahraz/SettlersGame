@@ -1,4 +1,12 @@
-
+<?php
+session_start();
+if(isset($_SESSION['id_player'] ))
+{
+    session_write_close();
+    header('Location: ../../game.php');
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="pl">
