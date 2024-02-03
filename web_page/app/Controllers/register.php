@@ -7,21 +7,45 @@ if(isset($_SESSION['id_player'] ))
     exit();
 }
 
-if (!isset($_POST['login']) || !isset($_POST['password']) || !isset($_POST['email'])) {
-    session_write_close();
-    header('Location: ../../index.php');
-    exit();
+if (!isset($_POST['login']) || !isset($_POST['password']) || !isset($_POST['email']) || $_POST['regulations']==false) {
+    
+        session_write_close();
+        header('Location: ../../index.php');
+        exit();
+
 }
 
-require_once('./connection.php');
-
-$pdo_login = isset($_POST['login']) ? $_POST['login'] : '';
+$pdo_login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : '';
 $pdo_password = isset($_POST['password']) ? $_POST['password'] : '';
 $pdo_email = isset($_POST['email'])? $_POST['email'] : '';
 $register_date = date("Ymd");  
 
+// validation
+$validation_flag = true;
+
+    if(strlen($pdo_login)<3 || strlen($pdo_login)>28){
+        $validation_flag = false;
+        $_SESSION['e_login']="Login powinien mieć od 3 do 28 znaków!";
+        session_write_close();
+        header('Location: ../../registration.php');
+        exit();
+    }
+    if(ctype_alnum($pdo_login)==false){
+        $validation_flag = false;
+        $_SESSION['e_login']="Login powinien składać się tylko z liter i cyfr (bez polskich znaków)";
+        session_write_close();
+        header('Location: ../../registration.php');
+        exit();
+    }
+
+
+
+
+
+
 // Haszowanie hasła
 $pdo_hashpassword = password_hash($pdo_password, PASSWORD_DEFAULT);
+require_once('./connection.php');
 
 try {
     // Tworzenie nowego połączenia PDO
