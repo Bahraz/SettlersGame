@@ -1,5 +1,7 @@
 <?php
-require_once('../app/Controllers/recaptacha.php');
+
+//TODO: Fix recaptcha in the future.
+// require_once('../app/Controllers/recaptcha.php');
 
     session_start();
     if(isset($_SESSION['id_player'] ))

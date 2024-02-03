@@ -1,46 +1,79 @@
 <?php
+require_once('./recaptcha.php');
+
+
+
 session_start();
-if(isset($_SESSION['id_player'] ))
-{
+if (isset($_SESSION['id_player'])) {
     session_write_close();
     header('Location: ../../game.php');
     exit();
 }
 
-if (!isset($_POST['login']) || !isset($_POST['password']) || !isset($_POST['email']) || $_POST['regulations']==false) {
-    
-        session_write_close();
-        header('Location: ../../index.php');
-        exit();
+if (! isset($_POST['login']) || ! isset($_POST['password']) || ! isset($_POST['email'])) {
+
+    session_write_close();
+    header('Location: ../../index.php');
+    exit();
 
 }
 
 $pdo_login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : '';
 $pdo_password = isset($_POST['password']) ? $_POST['password'] : '';
-$pdo_email = isset($_POST['email'])? $_POST['email'] : '';
-$register_date = date("Ymd");  
+$pdo_email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) : '';
+// $pdo_regulations = 
+$register_date = date("Ymd");
 
 // validation
 $validation_flag = true;
 
-    if(strlen($pdo_login)<3 || strlen($pdo_login)>28){
-        $validation_flag = false;
-        $_SESSION['e_login']="Login powinien mieć od 3 do 28 znaków!";
-        session_write_close();
-        header('Location: ../../registration.php');
-        exit();
-    }
-    if(ctype_alnum($pdo_login)==false){
-        $validation_flag = false;
-        $_SESSION['e_login']="Login powinien składać się tylko z liter i cyfr (bez polskich znaków)";
-        session_write_close();
-        header('Location: ../../registration.php');
-        exit();
-    }
+//login
+if (strlen($pdo_login) < 3 || strlen($pdo_login) > 28) {
+    $validation_flag = false;
+    $_SESSION['e_login'] = "Login powinien mieć od 3 do 28 znaków!";
+    session_write_close();
+    header('Location: ../../registration.php');
+    exit();
+}
+if (ctype_alnum($pdo_login) == false) {
+    $validation_flag = false;
+    $_SESSION['e_login'] = "Login powinien składać się tylko z liter i cyfr (bez polskich znaków)!";
+    session_write_close();
+    header('Location: ../../registration.php');
+    exit();
+}
 
+//password
+if ((strlen($pdo_password) < 8) || (strlen($pdo_password) > 32)) {
+    $validation_flag = false;
+    $_SESSION['e_password'] = "Hasło musi mieć od 8 do 32 znaków długości!";
+    session_write_close();
+    header('Location: ../../registration.php');
+    exit();
+}
+if (! preg_match('/[a-z]/', $pdo_password) || ! preg_match('/[A-Z]/', $pdo_password) || ! preg_match('/\d/', $pdo_password) || ! preg_match('/[^a-zA-Z\d]/', $pdo_password)) {
+    $validation_flag = false;
+    $_SESSION['e_password'] = "Hasło musi się składać z przynajmniej jednej dużej litery, małej litery oraz znaku specjalnego i cyfry";
+    session_write_close();
+    header('Location: ../../registration.php');
+    exit();
+}
 
+//email
+if ((filter_var($pdo_email, FILTER_VALIDATE_EMAIL) == false) || ($pdo_email != $_POST['email'])) {
+    $validation_flag = false;
+    $_SESSION['e_email'] = "Podano nieprawidłowy adres email!";
+    header('Location: ../../registration.php');
+    exit();
+}
 
-
+//regulations
+if (! isset($_POST['regulations']) == "on") {
+    $validation_flag = false;
+    $_SESSION['e_regulations'] = "Nie zaakceptowano regulamiunu!";
+    header('Location: ../../registration.php');
+    exit();
+}
 
 
 // Haszowanie hasła
