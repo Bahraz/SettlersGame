@@ -1,21 +1,19 @@
 <?php
 
-//TODO: Fix recaptcha in the future.
-// require_once('../app/Controllers/recaptcha.php');
-
 session_start();
 if (isset($_SESSION['id_player'])) {
     session_write_close();
     header('Location: ../app/View/pages/game.php');
     exit();
 }
-include('../app/View/layouts/header.php');
+include('../layouts/header.php');
 ?>
 
 <body>
-    <h1>Settlers Game Online</h1>
+    <h1>Settlers Game Online - Register</h1>
 
-    <?php include('../app/View/auth/loginForm.php'); ?>
+    <?php include('../auth/registrationForm.php');?>
+
 
     <script>
         function onSubmit(token) {
