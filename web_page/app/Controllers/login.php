@@ -51,7 +51,6 @@ try {
 
         exit();
     } else {
-        //TODO: Display information about incorrect login details
         $_SESSION['e_login'] = "Błedne dane logowania!";
         session_write_close();
         header('Location: ../../index.php');

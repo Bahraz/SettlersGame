@@ -25,7 +25,7 @@ $pdo_password = isset($_POST['password']) ? $_POST['password'] : '';
 $pdo_email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) : '';
 $register_date = date("Ymd");
 
-// validation
+// validation flag
 $validation_flag = true;
 
 //login
@@ -44,7 +44,7 @@ if (ctype_alnum($pdo_login) == false) {
     exit();
 }
 
-//password
+// password validation
 if ((strlen($pdo_password) < 8) || (strlen($pdo_password) > 32)) {
     $validation_flag = false;
     $_SESSION['e_password'] = "Hasło musi mieć od 8 do 32 znaków długości!";
@@ -60,7 +60,7 @@ if (! preg_match('/[a-z]/', $pdo_password) || ! preg_match('/[A-Z]/', $pdo_passw
     exit();
 }
 
-//email
+//email validation
 if ((filter_var($pdo_email, FILTER_VALIDATE_EMAIL) == false) || ($pdo_email != $_POST['email'])) {
     $validation_flag = false;
     $_SESSION['e_email'] = "Podano nieprawidłowy adres email!";
@@ -71,7 +71,7 @@ if ((filter_var($pdo_email, FILTER_VALIDATE_EMAIL) == false) || ($pdo_email != $
 //regulations
 if (! isset($_POST['regulations']) == "on") {
     $validation_flag = false;
-    $_SESSION['e_regulations'] = "Nie zaakceptowano regulamiunu!";
+    $_SESSION['e_regulations'] = "Nie zaakceptowano regulaminu!";
     header('Location: ../View/pages/registration.php');
     exit();
 }
@@ -112,7 +112,6 @@ try {
         $register_query->bindParam(':pdo_email', $pdo_email, PDO::PARAM_STR);
         $register_query->bindParam(':pdo_register_date', $register_date, PDO::PARAM_STR);
 
-        //TODO: Dodanie użytkownika do bazy danych i przejście do formularza logowania.
         $register_query->execute();
         $pdo_connection = null;
         if (session_status() == PHP_SESSION_NONE) {
@@ -122,14 +121,17 @@ try {
 
         $_SESSION['id_player'] = $user_data['id_player'];
         $_SESSION['login'] = $user_data['login'];
+
+        //TODO: Create first village in game and go to game page
+
+
+
+
         session_write_close();
-
         header('Location: ../../index.php');
-
         exit();
     }
 
-    // Zamknięcie połączenia PDO
 } catch (PDOException $e) {
     //TODO: Dodanie skryptu, który dodaje informacje do logów serwera.
     echo "Błąd połączenia z bazą danych: " . $e->getMessage();
