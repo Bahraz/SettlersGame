@@ -29,8 +29,8 @@ services:
     image: mysql:latest
     environment:
       MYSQL_ROOT_PASSWORD: ZAQ!2wsx
-      MYSQL_DATABASE: osadnicy_db
-      MYSQL_USER: db_osadnicy_user
+      MYSQL_DATABASE: settlers_db
+      MYSQL_USER: db_settlers_user
       MYSQL_PASSWORD: Test123
     ports:
       - "3306:3306"  # Mapowanie portu 3306 na hosta
