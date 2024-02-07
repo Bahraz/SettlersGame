@@ -44,6 +44,8 @@
     }
     ?>
 
+    <input type = "hidden" name = "action" value="registerAccount">
+
 
     <button class="g-recaptcha" data-sitekey="6LcermUpAAAAAHdYa8XSBdhzfCe_vXmWjnUtQ3O9" data-callback='onSubmit'
         type="submit" data-action='submit'>Rejestracja</button>
