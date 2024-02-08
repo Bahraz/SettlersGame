@@ -9,40 +9,52 @@ class PlayerController
 
     public function __construct($databaseConnection)
     {
-        $this->playerModel = new PlayerModel($databaseConnection);
+        $this->playerModel = new PlayerModel($databaseConnection->getConnection());
     }
 
-    public function registerAccount($login, $password, $email, $regulations, $connection)
+    public function registerAccount($login, $password, $email, $regulations, $registerDate)
     {
-        $result = $this->playerModel->registerAccount($login, $password, $email, $regulations);
+
+        $result = $this->playerModel->registerAccount($login, $password, $email, $regulations, $registerDate);
         return $result;
+    }
+
+    public function loginAccount($login, $password)
+    {
+        $result = $this->playerModel->loginAccount($login, $password);
+        return $result;
+
     }
 }
 
-
-$databaseConnection = new DatabaseConnection($servername, $database, $dbUsername, $dbPassword);
+global $databaseConnection;
 $playerController = new PlayerController($databaseConnection);
 
-// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-//     $pdo_connection = new PDO("mysql:host=localhost;dbname=twoja_baza_danych", $db_username, $db_password);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_POST['action'] == 'registerAccount') {
 
-//     $controller = new PlayerController($pdo_connection);
+        $pdoLogin = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : '';
+        $pdoPassword = isset($_POST['password']) ? $_POST['password'] : '';
+        $pdoEmail = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) : '';
+        $pdoRegulations = isset($_POST['regulations']);
+        $pdoRegisterDate = date("Ymd");
 
-//     if ($_POST['action'] == 'registerAccount') {
-//         $controller->registerAccount($_POST['login'], $_POST['password'], $_POST['email'], $_POST['regulations']);
-//     } elseif ($_POST['action'] == 'loginAccount') {
-//         $controller->loginAccount($_POST['login'], $_POST['password']);
+        $playerController->registerAccount($pdoLogin, $pdoPassword, $pdoEmail, $pdoRegulations, $pdoRegisterDate);
 
-//     }
-// }
+        header("Location: ../View/pages/game.php");
+        $databaseConnection = null;
+        exit();
 
+    } else if ($_POST['action'] == 'loginAccount') {
 
-// public function loginAccount($login, $password)
-// {
-//     $result = $this->loginAccount($login, $password);
-//     if ($result === true) {
-//         return "Zalogowano pomyślnie";
-//     } else {
-//         return $result;
-//     }
-// }
+        $pdoLogin = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : '';
+        $pdoPassword = isset($_POST['password']) ? $_POST['password'] : '';
+
+        $playerController->loginAccount($pdoLogin, $pdoPassword);
+
+        header('Location: ../View/pages/game.php');
+        $databaseConnection = null;
+        exit();
+
+    }
+}
