@@ -6,6 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+//TODO: add village Controller
 
 function CreateVillage($x, $y, $id, $conn)
 {
