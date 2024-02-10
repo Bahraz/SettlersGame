@@ -11,10 +11,9 @@ include('../layouts/header.php');
 <body>
     <h1>Witaj w grze!</h1>
     <?php
-    echo "<p>Witaj " . $_SESSION['id_player'] . $_SESSION['login'] . "!<br/><br/>"
-        ?>
-    <form action="../../Controllers/logout.php" method="POST">
-        <input type="submit" value="Wyloguj" /></a>
-    </form>
+    echo "<p>Witaj " . $_SESSION['id_player'] . $_SESSION['login'] . "!<br/><br/>";
+
+    include('../auth/logout.php');
+?>
 
 </html>
