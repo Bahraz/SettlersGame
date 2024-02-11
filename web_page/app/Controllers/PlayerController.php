@@ -22,9 +22,9 @@ class PlayerController
         return $this->playerModel->loginAccount($login, $password);
     }
 
-    public function logoutAccount($login)
+    public function logoutAccount()
     {
-        // return $this->playerModel->logoutAccount($login);
+        return $this->playerModel->logoutAccount();
     }
 }
 
@@ -45,16 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } elseif ($_POST['action'] == 'loginAccount') {
         $login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : '';
         $password = isset($_POST['password']) ? $_POST['password'] : '';
-
         $playerController->loginAccount($login, $password);
 
         header('Location: ../View/pages/game.php');
         exit();
     } elseif ($_POST['action'] == 'logoutAccount') {
-        // session_start();
-        // $login=$_SESSION['login'];
-        // $playerController->logoutAccount($login);
-        // header('Location: ../../index.php');
-        // exit();
+        $playerController->logoutAccount();
+        header('Location: ../../index.php');
+        exit();
     }
 }
