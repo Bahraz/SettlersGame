@@ -1,7 +1,10 @@
 <?php
 
-include("../Controllers/connection.php");
+if (! class_exists('DatabaseConnection')) {
+    include("../Controllers/connection.php");
+}
 include("../Models/PlayerModel.php");
+include("../Controllers/VillageController.php");
 
 class PlayerController
 {
@@ -29,6 +32,8 @@ class PlayerController
 }
 
 $playerController = new PlayerController($databaseConnection->getConnection());
+$villageController = new VillageController($databaseConnection->getConnection());
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['action'] == 'registerAccount') {
@@ -40,7 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $playerController->registerAccount($login, $password, $email, $regulations, $registerDate);
 
+        $idPlayer = $_SESSION['id_player'];
+
+        $villageController->CreateNewVillage($idPlayer);
+
+
         header("Location: ../View/pages/game.php");
+        $pdo = null;
         exit();
     } elseif ($_POST['action'] == 'loginAccount') {
         $login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : '';
@@ -48,10 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $playerController->loginAccount($login, $password);
 
         header('Location: ../View/pages/game.php');
+        $pdo = null;
         exit();
     } elseif ($_POST['action'] == 'logoutAccount') {
         $playerController->logoutAccount();
         header('Location: ../../index.php');
+        $pdo = null;
         exit();
     }
 }

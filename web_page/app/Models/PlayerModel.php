@@ -1,5 +1,4 @@
 <?php
-
 class PlayerModel
 {
     private $pdo;
