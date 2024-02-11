@@ -8,14 +8,14 @@ if (session_status() == PHP_SESSION_NONE) {
 
 //TODO: add village Controller
 
-function CreateVillage($x, $y, $id, $conn)
-{
-    // Tworzenie zapytania generującego wioskę.
-    $create_village = $conn->prepare("INSERT INTO village (`id_player`, `village_x`, `village_y`, `village_name`, `village_points`, `castle_lv`, `claypit_lv`, `ironmine_lv`, `sawmill_lv`, `warehouse_lv`, `farms_lv`, `smithy_lv`, `barracks_lv`, `walls_lv`, `commandstaff_lv`, `knightchamber_lv`) VALUES ('$id', $x,$y,'Village',46,2,1,1,1,2,2,0,0,0,0,0)");
+// function CreateVillage($x, $y, $id, $conn)
+// {
+//     // Tworzenie zapytania generującego wioskę.
+//     $create_village = $conn->prepare("INSERT INTO village (`id_player`, `village_x`, `village_y`, `village_name`, `village_points`, `castle_lv`, `claypit_lv`, `ironmine_lv`, `sawmill_lv`, `warehouse_lv`, `farms_lv`, `smithy_lv`, `barracks_lv`, `walls_lv`, `commandstaff_lv`, `knightchamber_lv`) VALUES ('$id', $x,$y,'Village',46,2,1,1,1,2,2,0,0,0,0,0)");
 
 
-    $create_village->execute();
-}
+//     $create_village->execute();
+// }
 
 function CheckVillage($x,$y,$id,$conn){
             // Tworzenie zapytania sprawdzającego istinienie wioski w danym miejscu oraz czy gracz ten posiada już wioskę.
@@ -28,10 +28,10 @@ function CheckVillage($x,$y,$id,$conn){
             return $num_rows;
 }
 
-function RandCoord(){
-    $coord_x = rand(0, 10);
-    $coord_y = rand(0, 10);
-    return array($coord_x,$coord_y);
+function RandCoordVillage(){
+    $coordX = rand(0, 10);
+    $coordY = rand(0, 10);
+    return array($coordX,$coordY);
 }
 
 

@@ -76,10 +76,9 @@ class PlayerModel
     public function logoutAccount()
     {
         session_start();
-        if (isset($_SESSION['id_player'])) {
-            session_destroy();
-            
-            exit();
-        }
+
+        $_SESSION = array();
+
+        session_destroy();
     }
 }
