@@ -43,7 +43,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $regulations = isset($_POST['regulations']);
         $registerDate = date("Ymd");
 
-        $playerController->registerAccount($login, $password, $email, $regulations, $registerDate);
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        if (! $regulations) {
+            return "Nie zaakceptowano regulaminu";
+        }
+
+        if (! preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,32}$/', $password)) {
+            return "Hasło musi mieć od 8 do 32 znaków długości i zawierać przynajmniej jedną dużą literę, jedną małą literę, jedną cyfrę i jeden znak specjalny!";
+        }
+
+        if (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return "Podano nieprawidłowy adres email!";
+        }
+
+        $playerController->registerAccount($login, $hashPassword, $email, $regulations, $registerDate);
 
         $idPlayer = $_SESSION['id_player'];
 
