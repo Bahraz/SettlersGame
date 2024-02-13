@@ -1,4 +1,4 @@
-<form action="../../app/Controllers/PlayerController.php" method="POST" id="recap_form">
+<form action="../../app/View/auth/login.php" method="POST" id="recap_form">
     Login: <br/><input type="text" name="login" />
     <?php
         if (isset($_SESSION['e_login'])) {
