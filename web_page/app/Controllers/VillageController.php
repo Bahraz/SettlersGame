@@ -1,9 +1,9 @@
 <?php
 
 if (! class_exists('DatabaseConnection')) {
-    include("../Controllers/connection.php");
+    include("../controllers/connection.php");
 }
-include("../Models/VillageModel.php");
+include("../models/VillageModel.php");
 
 class VillageController
 {
