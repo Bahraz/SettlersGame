@@ -6,16 +6,16 @@
 session_start();
 if (isset($_SESSION['id_player'])) {
     session_write_close();
-    header('Location: ../app/View/pages/game.php');
+    header('Location: ../app/views/pages/game.php');
     exit();
 }
-include('../app/View/layouts/header.php');
+include('../app/views/layouts/header.php');
 ?>
 
 <body>
     <h1>Settlers Game Online</h1>
 
-    <?php include('../app/View/auth/loginForm.php'); ?>
+    <?php include('../app/views/auth/loginForm.php'); ?>
 
     <script>
         function onSubmit(token) {

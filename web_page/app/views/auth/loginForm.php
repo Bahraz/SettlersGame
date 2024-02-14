@@ -1,4 +1,4 @@
-<form action="../../app/View/auth/login.php" method="POST" id="recap_form">
+<form action="../../app/routers/router.php" method="POST" id="recap_form">
     Login: <br/><input type="text" name="login" />
     <?php
         if (isset($_SESSION['e_login'])) {
@@ -8,7 +8,7 @@
         }
         ?><br/>
     Hasło: <br/><input type="password" name="password" /><br/><br/>
-    <input type = "hidden" name = "action" value="loginAccount">
+    <input type = "hidden" name = "action" value="loginPlayer">
     <button class="g-recaptcha" 
         data-sitekey="6LcermUpAAAAAHdYa8XSBdhzfCe_vXmWjnUtQ3O9" 
         data-callback='onSubmit' 
@@ -17,4 +17,4 @@
     </form>
     <br/>
     Nie masz konta? Zarejestruj się!<br/><br/>
-    <a href="../app/View/pages/registration.php"><input type="submit" value="Rejestracja"/></a>
+    <a href="../app/views/pages/registration.php"><input type="submit" value="Rejestracja"/></a>

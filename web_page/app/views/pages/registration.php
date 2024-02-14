@@ -3,7 +3,7 @@
 session_start();
 if (isset($_SESSION['id_player'])) {
     session_write_close();
-    header('Location: ../app/View/pages/game.php');
+    header('Location: ../app/views/pages/game.php');
     exit();
 }
 include('../layouts/header.php');

@@ -1,6 +1,6 @@
 <?php
 
-include("../Models/PlayerModel.php");
+include("../models/PlayerModel.php");
 //include("../Controllers/VillageController.php");
 
 class PlayerController
@@ -44,6 +44,7 @@ class PlayerController
         //TODO: need more info about player
         if ($playerInfo !== false) {
             session_start();
+
             $_SESSION["idPlayer"] = $playerInfo["idPlayer"];
             $_SESSION["login"] = $playerInfo["login"];
             session_write_close();
@@ -89,7 +90,7 @@ class PlayerController
             if ($registerPlayer == true) {
                 $getInfo = $this->getPlayerInfo($login);
                 if ($getInfo == true) {
-                    header("Location: ../View/pages/game.php");
+                    header("Location: ../views/pages/game.php");
                     exit();
                 }
                 return "Błąd pobierania danych użytkownika.";
@@ -101,28 +102,32 @@ class PlayerController
         }
     }
 
-    public function loginPlayer(string $login, string $password)
+    public function loginPlayer(string $login, string $password, string $action)
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['action'] == 'loginPlayer') {
             $login = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : '';
             $password = isset($_POST['password']) ? $_POST['password'] : '';
+
 
             $validationResult = $this->validateLogin($login);
             if ($validationResult == false) {
                 return "Login powinien składać się tylko z małych i dużych liter oraz cyfr.";
             }
 
-            $validationResult = $this->validatePassword($password);
-            if ($validationResult == false) {
-                return "Hasło musi mieć od 8 do 32 znaków długości i zawierać przynajmniej jedną dużą literę, jedną małą literę, jedną cyfrę i jeden znak specjalny.";
-            }
+            //TODO: uncomment after change password in DB for test account
+            // $validationResult = $this->validatePassword($password);
+            // if ($validationResult == false) {
+            //     return "Hasło musi mieć od 8 do 32 znaków długości i zawierać przynajmniej jedną dużą literę, jedną małą literę, jedną cyfrę i jeden znak specjalny.";
+            // }
+
 
             $tryLogin = $this->playerModel->loginPlayer($login, $password);
-
             if ($tryLogin === true) {
                 $getInfo = $this->getPlayerInfo($login);
+
                 if ($getInfo == true) {
-                    header("Location: ../View/pages/game.php");
+
+                    header("Location: ../views/pages/game.php");
                     exit();
                 }
                 return "Błąd pobierania danych użytkownika.";
@@ -137,6 +142,8 @@ class PlayerController
         session_start();
         $_SESSION = array();
         session_destroy();
+        header("Location: ../../index.php");
+        exit();
     }
 
 }
