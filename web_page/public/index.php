@@ -19,7 +19,7 @@ include('../app/views/layouts/header.php');
 
     <script>
         function onSubmit(token) {
-            document.getElementById("recap_form").submit();
+            document.getElementById('recap_form').submit();
         }
     </script>
 

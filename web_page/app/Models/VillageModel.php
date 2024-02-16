@@ -19,7 +19,7 @@ class VillageModel
     function CheckPlayerHasVillage($idPlayer)
     {
         // Tworzenie zapytania sprawdzającego istinienie wioski w danym miejscu oraz czy gracz ten posiada już wioskę.
-        $checkPlayerHasVillage = $this->pdo->prepare("SELECT * FROM village WHERE id_player = :pdo_idplayer");
+        $checkPlayerHasVillage = $this->pdo->prepare('SELECT * FROM village WHERE id_player = :pdo_idplayer');
 
         // Przypisanie parametrów i wykonanie polecenia
         $checkPlayerHasVillage->bindParam(':pdo_idplayer', $idPlayer, PDO::PARAM_STR);
@@ -30,7 +30,7 @@ class VillageModel
 
     public function CheckVillageExist($coordX, $coordY)
     {
-        $checkVillageExist = $this->pdo->prepare("SELECT * FROM village WHERE village_x = $coordX AND village_y = $coordY");
+        $checkVillageExist = $this->pdo->prepare('SELECT * FROM village WHERE village_x = $coordX AND village_y = $coordY');
         $checkVillageExist->execute();
         $num_rows = $checkVillageExist->rowCount();
 
