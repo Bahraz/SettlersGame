@@ -14,7 +14,7 @@ $answer_captcha = json_decode($check_captcha);
 
 if ($answer_captcha->success == false) {
     $validation_flag = false;
-    $_SESSION['e_bot'] = "Potwierdź, że nie jesteś botem!";
+    $_SESSION['e_bot'] = 'Potwierdź, że nie jesteś botem!';
     session_write_close();
     header('Location: ../views/pages/registration.php');
     exit();

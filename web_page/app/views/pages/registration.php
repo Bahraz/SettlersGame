@@ -12,12 +12,12 @@ include('../layouts/header.php');
 <body>
     <h1>Settlers Game Online - Register</h1>
 
-    <?php include('../auth/registrationForm.php');?>
+    <?php include('../auth/registrationForm.php'); ?>
 
 
     <script>
         function onSubmit(token) {
-            document.getElementById("recap_form").submit();
+            document.getElementById('recap_form').submit();
         }
     </script>
 

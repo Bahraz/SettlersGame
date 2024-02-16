@@ -1,5 +1,5 @@
-<form name="register" action="../../controllers/PlayerController.php" method="POST" id="recap_form">
-    Login: <br /><input type="text" name="login" />
+<form name='register' action='../../../app/routers/router.php' method='POST' id='recap_form'>
+    Login: <br /><input type='text' name='login' />
     <?php
     if (isset($_SESSION['e_login'])) {
         echo '<div class="error" style="color:red">' . $_SESSION['e_login'] . '</div>';
@@ -7,7 +7,7 @@
         session_write_close();
     }
     ?><br />
-    Hasło: <br /><input type="password" name="password" />
+    Hasło: <br /><input type='password' name='password' />
     <?php
     if (isset($_SESSION['e_password'])) {
         echo '<div class="error" style="color:red">' . $_SESSION['e_password'] . '</div>';
@@ -15,7 +15,7 @@
         session_write_close();
     }
     ?><br />
-    Email: <br /><input type="text" name="email" />
+    Email: <br /><input type='text' name='email' />
     <?php
     if (isset($_SESSION['e_email'])) {
         echo '<div class="error" style="color:red">' . $_SESSION['e_email'] . '</div>';
@@ -25,7 +25,7 @@
     ?><br />
 
     <label>
-        <input type="checkbox" name="regulations" /> Akceptuje <a href="">regulamin</a>
+        <input type='checkbox' name='regulations' /> Akceptuje <a href=''>regulamin</a>
         <?php
         if (isset($_SESSION['e_regulations'])) {
             echo '<div class="error" style="color:red">' . $_SESSION['e_regulations'] . '</div>';
@@ -44,12 +44,12 @@
     }
     ?>
 
-    <input type = "hidden" name = "action" value="registerAccount">
+    <input type='hidden' name='action' value='registerPlayer'>
 
 
-    <button class="g-recaptcha" data-sitekey="6LcermUpAAAAAHdYa8XSBdhzfCe_vXmWjnUtQ3O9" data-callback='onSubmit'
-        type="submit" data-action='submit'>Rejestracja</button>
+    <button class='g-recaptcha' data-sitekey='6LcermUpAAAAAHdYa8XSBdhzfCe_vXmWjnUtQ3O9' data-callback='onSubmit'
+        type='submit' data-action='submit'>Rejestracja</button>
 </form>
 <br />
 Masz już konto? Zaloguj się!<br /><br />
-<a href="../../../index.php"><input type="submit" value="Login" /></a>
+<a href='../../../index.php'><input type='submit' value='Login' /></a>

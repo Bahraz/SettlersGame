@@ -1,9 +1,9 @@
 <?php
 
 if (! class_exists('DatabaseConnection')) {
-    include("../controllers/connection.php");
+    include('../controllers/connection.php');
 }
-include("../models/VillageModel.php");
+include('../models/VillageModel.php');
 
 class VillageController
 {
@@ -19,7 +19,8 @@ class VillageController
         return $this->VillageModel->RandCoordVillage();
     }
 
-    public function CheckPlayerHasVillage($idPlayer){
+    public function CheckPlayerHasVillage($idPlayer)
+    {
         return $this->VillageModel->CheckPlayerHasVillage($idPlayer);
     }
     public function CheckVillageExist($coordX, $coordY)
@@ -34,13 +35,13 @@ class VillageController
 
     public function CreateNewVillage($idPlayer)
     {
-        $hasVillage=$this->CheckPlayerHasVillage($idPlayer);
-        if(!$hasVillage){
-            do{
+        $hasVillage = $this->CheckPlayerHasVillage($idPlayer);
+        if (! $hasVillage) {
+            do {
                 $coordinates = $this->RandCoordVillage();
-                $coordX=$coordinates[0];
-                $coordY=$coordinates[1];
-            }while($this->CheckVillageExist($coordX, $coordY));
+                $coordX = $coordinates[0];
+                $coordY = $coordinates[1];
+            } while ($this->CheckVillageExist($coordX, $coordY));
 
             $this->VillageModel->CreateVillage($coordX, $coordY, $idPlayer);
 

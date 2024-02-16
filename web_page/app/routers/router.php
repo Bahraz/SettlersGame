@@ -1,5 +1,5 @@
 <?php
-include("../controllers/PlayerController.php");
+include('../controllers/PlayerController.php');
 $playerController = new PlayerController($databaseConnection);
 
 //TODO: add routers for register
@@ -8,11 +8,35 @@ $playerController = new PlayerController($databaseConnection);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if ($_POST['action'] === 'loginPlayer') {
-        $playerController->loginPlayer($_POST['login'], $_POST['password'], $_POST['action']);
+    if (isset($_POST['action'])) {
+        $action = $_POST['action'];
 
-    } else if ($_POST['action'] === 'logoutPlayer') {
-        $playerController->logoutPlayer();
-        
+        switch ($action) {
+            case 'loginPlayer':
+                if (isset($_POST['login']) && isset($_POST['password'])) {
+                    $login = htmlspecialchars($_POST['login']);
+                    $password = $_POST['password'];
+                    $playerController->loginPlayer($login, $password);
+                }
+                break;
+
+            case 'registerPlayer':
+                if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['regulations'])) {
+
+                    $login = htmlspecialchars($_POST['login']);
+                    $password = $_POST['password'];
+                    $email = $_POST['email'];
+                    $regulations = true;
+                    $verifiedEmail = false;
+                    $creationDate = date('Ymd');
+
+                    $playerController->registerPlayer($login, $password, $email, $regulations, $verifiedEmail, $creationDate);
+                }
+                break;
+
+            case 'logoutPlayer':
+                $playerController->logoutPlayer();
+                break;
+        }
     }
 }
