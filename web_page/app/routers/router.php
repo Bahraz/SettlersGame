@@ -2,6 +2,7 @@
 include('../controllers/PlayerController.php');
 $playerController = new PlayerController($databaseConnection);
 
+
 //TODO: add routers for register
 
 //check routers method

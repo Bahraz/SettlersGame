@@ -2,7 +2,7 @@
 
 include('../models/PlayerModel.php');
 include('../Controllers/VillageController.php');
-include('../models/VillageModel.php');
+
 
 class PlayerController
 {
@@ -44,11 +44,10 @@ class PlayerController
 
     public function getPlayerInfo(string $login)
     {
-        $playerInfo = $this->playerModel->playerInfo($login);
+        $playerInfo = $this->playerModel->getPlayerInfo($login);
         //TODO: need more info about player
         if ($playerInfo !== false) {
             session_start();
-
             $_SESSION['idPlayer'] = $playerInfo['idPlayer'];
             $_SESSION['login'] = $playerInfo['login'];
             session_write_close();
@@ -87,14 +86,18 @@ class PlayerController
             if ($registerPlayer == true) {
                 $getInfo = $this->getPlayerInfo($login);
                 if ($getInfo == true) {
-
                     session_start();
                     $idPlayer = $_SESSION['idPlayer'];
                     session_write_close();
+                    if (! class_exists('DatabaseConnection')) {
+                        include('../controllers/connection.php');
+                    }
 
-                    $villageModel = new VillageModel();
-                    $villageController = new VillageController($villageModel);
+                    // $villageController=new VillageController();
+                    $villageController = new VillageController($databaseConnection);
+
                     $createVillage = $villageController->createNewVillage($idPlayer);
+
                     if ($createVillage == true) {
 
                         header('Location: ../views/pages/game.php');

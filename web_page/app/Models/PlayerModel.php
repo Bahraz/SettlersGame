@@ -57,7 +57,7 @@ class PlayerModel
         }
     }
 
-    public function playerInfo(string $login)
+    public function getPlayerInfo(string $login)
     {
         $stmt = $this->connection->prepare("SELECT * FROM players WHERE login = :login");
         $stmt->bindParam(':login', $login, PDO::PARAM_STR);
