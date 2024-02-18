@@ -4,7 +4,7 @@ if (! class_exists('DatabaseConnection')) {
     include('../controllers/connection.php');
 }
 
-class villageModel
+class VillageModel
 {
     private $connection;
 
@@ -12,8 +12,7 @@ class villageModel
     {
         $this->connection = $databaseConnection->getConnection();
     }
-
-    public function checkPlayerHasVillage($idPlayer)
+ public function checkPlayerHasVillage($idPlayer)
     {
         $checkPlayerHasVillage = $this->connection->prepare('SELECT * FROM village WHERE id_player = :pdo_idplayer');
         $checkPlayerHasVillage->bindParam(':pdo_idplayer', $idPlayer, PDO::PARAM_STR);
@@ -48,3 +47,4 @@ class villageModel
     }
 
 }
+

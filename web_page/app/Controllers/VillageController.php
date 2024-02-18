@@ -1,14 +1,14 @@
 <?php
 
-include('../models/villageModel.php');
+include('../models/VillageModel.php');
 
 class VillageController
 {
     private $villageModel;
 
-    public function __construct($villageModel)
+    public function __construct($villageModel = null)
     {
-        $this->villageModel = new villageModel($villageModel);
+            $this->villageModel = new VillageModel($villageModel);
     }
 
     public function villageCoordinateDraw()
@@ -48,6 +48,7 @@ class VillageController
         }
         return false;
     }
+
 }
 
 
