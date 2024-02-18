@@ -1,7 +1,9 @@
 <?php
 
 include('../models/PlayerModel.php');
-//include('../Controllers/VillageController.php');
+include('../Controllers/VillageController.php');
+include('../models/VillageModel.php');
+
 class PlayerController
 {
     private $playerModel;
@@ -53,7 +55,7 @@ class PlayerController
             return true;
         }
     }
-     public function registerPlayer(string $login, string $password, string $email, bool $regulations, bool $verifiedEmail, string $creationDate)
+    public function registerPlayer(string $login, string $password, string $email, bool $regulations, bool $verifiedEmail, string $creationDate)
     {
 
         $validationResult = $this->validateLogin($login);
@@ -85,8 +87,21 @@ class PlayerController
             if ($registerPlayer == true) {
                 $getInfo = $this->getPlayerInfo($login);
                 if ($getInfo == true) {
-                    header('Location: ../views/pages/game.php');
-                    exit();
+
+                    session_start();
+                    $idPlayer = $_SESSION['idPlayer'];
+                    session_write_close();
+
+                    $villageModel = new VillageModel();
+                    $villageController = new VillageController($villageModel);
+                    $createVillage = $villageController->createNewVillage($idPlayer);
+                    if ($createVillage == true) {
+
+                        header('Location: ../views/pages/game.php');
+                        exit();
+                    } else {
+                        return 'Błąd tworzenia wioski.';
+                    }
                 }
                 return 'Błąd pobierania danych użytkownika.';
             } else {

@@ -1,19 +1,21 @@
 <?php
 
-require_once('../Controllers/connection.php');
+if (! class_exists('DatabaseConnection')) {
+    include('../controllers/connection.php');
+}
 
 class PlayerModel
 {
-    private $pdo;
+    private $connection;
 
     public function __construct(DatabaseConnection $databaseConnection)
     {
-        $this->pdo = $databaseConnection->getConnection();
+        $this->connection = $databaseConnection->getConnection();
     }
 
     public function playerExist(string $login, string $email)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM players WHERE login = :login OR email = :email");
+        $stmt = $this->connection->prepare("SELECT * FROM players WHERE login = :login OR email = :email");
         $stmt->bindParam(':login', $login, PDO::PARAM_STR);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
@@ -27,7 +29,7 @@ class PlayerModel
 
     public function registerPlayer(string $login, string $hashPassword, string $email, bool $regulations, bool $verifiedEmail, string $creationDate)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO players (login,password,email,regulations,verifiedEmail,creationDate) VALUES (:login, :hashPassword, :email, :regulations, :verifiedEmail, :creationDate)");
+        $stmt = $this->connection->prepare("INSERT INTO players (login,password,email,regulations,verifiedEmail,creationDate) VALUES (:login, :hashPassword, :email, :regulations, :verifiedEmail, :creationDate)");
         $stmt->bindParam(':login', $login, PDO::PARAM_STR);
         $stmt->bindParam(':hashPassword', $hashPassword, PDO::PARAM_STR);
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
@@ -42,7 +44,7 @@ class PlayerModel
 
     public function loginPlayer(string $login, string $checkPassword)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM players WHERE login = :login");
+        $stmt = $this->connection->prepare("SELECT * FROM players WHERE login = :login");
         $stmt->bindParam(':login', $login, PDO::PARAM_STR);
         $stmt->execute();
 
@@ -57,7 +59,7 @@ class PlayerModel
 
     public function playerInfo(string $login)
     {
-        $stmt = $this->pdo->prepare("SELECT * FROM players WHERE login = :login");
+        $stmt = $this->connection->prepare("SELECT * FROM players WHERE login = :login");
         $stmt->bindParam(':login', $login, PDO::PARAM_STR);
         $stmt->execute();
 

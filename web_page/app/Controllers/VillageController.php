@@ -1,49 +1,48 @@
 <?php
 
-if (! class_exists('DatabaseConnection')) {
-    include('../controllers/connection.php');
-}
-include('../models/VillageModel.php');
-//TODO: add village controller {need change}
+include('../models/villageModel.php');
+
 class VillageController
 {
-    private $VillageModel;
+    private $villageModel;
 
-    public function __construct($pdo)
+    public function __construct($villageModel)
     {
-        $this->VillageModel = new VillageModel($pdo);
+        $this->villageModel = new villageModel($villageModel);
     }
 
-    public function RandCoordVillage()
+    public function villageCoordinateDraw()
     {
-        return $this->VillageModel->RandCoordVillage();
+        $coordX = rand(0, 10);
+        $coordY = rand(0, 10);
+        return array($coordX, $coordY);
     }
 
-    public function CheckPlayerHasVillage($idPlayer)
+    public function checkPlayerHasVillage($idPlayer)
     {
-        return $this->VillageModel->CheckPlayerHasVillage($idPlayer);
+        return $this->villageModel->checkPlayerHasVillage($idPlayer);
     }
-    public function CheckVillageExist($coordX, $coordY)
+    public function checkVillageCoordinates($coordX, $coordY)
     {
-        return $this->VillageModel->CheckVillageExist($coordX, $coordY);
-    }
-
-    public function CreateVillage($coordX, $coordY, $idPlayer)
-    {
-        return $this->VillageModel->CreateVillage($coordX, $coordY, $idPlayer);
+        return $this->villageModel->checkVillageCoordinates($coordX, $coordY);
     }
 
-    public function CreateNewVillage($idPlayer)
+    public function createVillage($coordX, $coordY, $idPlayer)
     {
-        $hasVillage = $this->CheckPlayerHasVillage($idPlayer);
+        return $this->villageModel->createVillage($coordX, $coordY, $idPlayer);
+    }
+
+    public function createNewVillage($idPlayer)
+    {
+        $hasVillage = $this->checkPlayerHasVillage($idPlayer);
         if (! $hasVillage) {
             do {
-                $coordinates = $this->RandCoordVillage();
+                $coordinates = $this->villageCoordinateDraw();
                 $coordX = $coordinates[0];
                 $coordY = $coordinates[1];
-            } while ($this->CheckVillageExist($coordX, $coordY));
+            } while ($this->checkVillageCoordinates($coordX, $coordY));
 
-            $this->VillageModel->CreateVillage($coordX, $coordY, $idPlayer);
+            $this->villageModel->createVillage($coordX, $coordY, $idPlayer);
 
             return true;
         }

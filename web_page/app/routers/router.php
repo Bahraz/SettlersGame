@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $login = htmlspecialchars($_POST['login']);
                     $password = $_POST['password'];
                     $email = $_POST['email'];
-                    $regulations = true;
+                    $regulations = isset($_POST['regulations']);
                     $verifiedEmail = false;
                     $creationDate = date('Ymd');
 

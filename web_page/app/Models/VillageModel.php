@@ -1,38 +1,33 @@
 <?php
 
-class VillageModel
+if (! class_exists('DatabaseConnection')) {
+    include('../controllers/connection.php');
+}
+
+class villageModel
 {
-    private $pdo;
+    private $connection;
 
-    public function __construct($pdo)
+    public function __construct(DatabaseConnection $databaseConnection)
     {
-        $this->pdo = $pdo;
+        $this->connection = $databaseConnection->getConnection();
     }
 
-    function RandCoordVillage()
+    public function checkPlayerHasVillage($idPlayer)
     {
-        $coordX = rand(0, 10);
-        $coordY = rand(0, 10);
-        return array($coordX, $coordY);
-    }
-
-    function CheckPlayerHasVillage($idPlayer)
-    {
-        // Tworzenie zapytania sprawdzającego istinienie wioski w danym miejscu oraz czy gracz ten posiada już wioskę.
-        $checkPlayerHasVillage = $this->pdo->prepare('SELECT * FROM village WHERE id_player = :pdo_idplayer');
-
-        // Przypisanie parametrów i wykonanie polecenia
+        $checkPlayerHasVillage = $this->connection->prepare('SELECT * FROM village WHERE id_player = :pdo_idplayer');
         $checkPlayerHasVillage->bindParam(':pdo_idplayer', $idPlayer, PDO::PARAM_STR);
         $checkPlayerHasVillage->execute();
         $num_rows = $checkPlayerHasVillage->rowCount();
         return $num_rows;
     }
 
-    public function CheckVillageExist($coordX, $coordY)
+    public function checkVillageCoordinates($coordX, $coordY)
     {
-        $checkVillageExist = $this->pdo->prepare('SELECT * FROM village WHERE village_x = $coordX AND village_y = $coordY');
-        $checkVillageExist->execute();
-        $num_rows = $checkVillageExist->rowCount();
+        //checking village with coord X&Y exist
+        $checkVillageCoordinates = $this->connection->prepare('SELECT * FROM village WHERE village_x = $coordX AND village_y = $coordY');
+        $checkVillageCoordinates->execute();
+        $num_rows = $checkVillageCoordinates->rowCount();
 
         if ($num_rows != 0) {
             return false;
@@ -42,16 +37,13 @@ class VillageModel
 
     }
 
-    public function CreateVillage($coordX, $coordY, $idPlayer)
+    public function createVillage($coordX, $coordY, $idPlayer)
     {
-        $createVillage = $this->pdo->prepare("INSERT INTO village (`id_player`, `village_x`, `village_y`, `village_name`, `village_points`, `castle_lv`, `claypit_lv`, `ironmine_lv`, `sawmill_lv`, `warehouse_lv`, `farms_lv`, `smithy_lv`, `barracks_lv`, `walls_lv`, `commandstaff_lv`, `knightchamber_lv`) VALUES (:idPlayer, :coordX, :coordY, 'Village', 46, 2, 1, 1, 1, 2, 2, 0, 0, 0, 0, 0)");
+        $createVillage = $this->connection->prepare("INSERT INTO village (`id_player`, `village_x`, `village_y`, `village_name`, `village_points`, `castle_lv`, `claypit_lv`, `ironmine_lv`, `sawmill_lv`, `warehouse_lv`, `farms_lv`, `smithy_lv`, `barracks_lv`, `walls_lv`, `commandstaff_lv`, `knightchamber_lv`) VALUES (:idPlayer, :coordX, :coordY, 'Village', 46, 2, 1, 1, 1, 2, 2, 0, 0, 0, 0, 0)");
 
-        // Związanie parametrów
         $createVillage->bindParam(':idPlayer', $idPlayer, PDO::PARAM_INT);
         $createVillage->bindParam(':coordX', $coordX, PDO::PARAM_INT);
         $createVillage->bindParam(':coordY', $coordY, PDO::PARAM_INT);
-        
-
         $createVillage->execute();
     }
 
