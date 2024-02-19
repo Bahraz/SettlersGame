@@ -3,7 +3,6 @@
 //TODO: Fix recaptcha in the future.
 // require_once('../app/Controllers/recaptcha.php');
 
-$request_uri = $_SERVER['REQUEST_URI'];
 
 
 session_start();
