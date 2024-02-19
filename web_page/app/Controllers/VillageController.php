@@ -34,6 +34,7 @@ class VillageController
 
     public function createNewVillage($idPlayer)
     {
+        
         $hasVillage = $this->checkPlayerHasVillage($idPlayer);
         if (! $hasVillage) {
             do {

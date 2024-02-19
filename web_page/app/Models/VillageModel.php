@@ -24,7 +24,7 @@ class VillageModel
     public function checkVillageCoordinates($coordX, $coordY)
     {
         //checking village with coord X&Y exist
-        $checkVillageCoordinates = $this->connection->prepare('SELECT * FROM village WHERE village_x = $coordX AND village_y = $coordY');
+        $checkVillageCoordinates = $this->connection->prepare('SELECT * FROM village WHERE village_x = '.$coordX.' AND village_y = '.$coordY.'');
         $checkVillageCoordinates->execute();
         $num_rows = $checkVillageCoordinates->rowCount();
 
