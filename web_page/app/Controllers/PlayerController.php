@@ -2,6 +2,7 @@
 
 include('../models/PlayerModel.php');
 include('../Controllers/VillageController.php');
+$villageController = new VillageController($databaseConnection);
 
 
 class PlayerController
@@ -89,15 +90,11 @@ class PlayerController
                     session_start();
                     $idPlayer = $_SESSION['idPlayer'];
                     session_write_close();
-                    if (! class_exists('DatabaseConnection')) {
-                        include('../controllers/connection.php');
-                    }
 
-                    // $villageController=new VillageController();
-                    $villageController = new VillageController($databaseConnection);
-
+                    global $villageController;
                     $createVillage = $villageController->createNewVillage($idPlayer);
 
+                    
                     if ($createVillage == true) {
 
                         header('Location: ../views/pages/game.php');

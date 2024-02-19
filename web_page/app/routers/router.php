@@ -2,10 +2,11 @@
 include('../controllers/PlayerController.php');
 $playerController = new PlayerController($databaseConnection);
 
-
+$request_uri = $_SERVER['REQUEST_URI'];
+echo $request_uri;
 //TODO: add routers for register
 
-//check routers method
+// check routers method
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -20,8 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $playerController->loginPlayer($login, $password);
                 }
                 break;
-
+                
             case 'registerPlayer':
+
                 if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['regulations'])) {
 
                     $login = htmlspecialchars($_POST['login']);

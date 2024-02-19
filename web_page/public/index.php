@@ -3,6 +3,8 @@
 //TODO: Fix recaptcha in the future.
 // require_once('../app/Controllers/recaptcha.php');
 
+
+
 session_start();
 if (isset($_SESSION['id_player'])) {
     session_write_close();
