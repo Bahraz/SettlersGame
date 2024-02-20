@@ -1,8 +1,10 @@
 <?php
 
+namespace App\Controllers;
+
 include('../models/PlayerModel.php');
 include('../Controllers/VillageController.php');
-$villageController = new VillageController($databaseConnection);
+// $villageController = new VillageController($databaseConnection);
 
 
 class PlayerController
