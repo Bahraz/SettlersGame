@@ -1,9 +1,15 @@
 <?php
-include('../controllers/PlayerController.php');
+// include('../controllers/PlayerController.php');
+// $playerController = new PlayerController($databaseConnection);
+
+require_once __DIR__ . '../../vendor/autoload.php';
+
+use App\Controllers\PlayerController;
+
 $playerController = new PlayerController($databaseConnection);
 
-$request_uri = $_SERVER['REQUEST_URI'];
-echo $request_uri;
+// $request_uri = $_SERVER['REQUEST_URI'];
+// echo $request_uri;
 //TODO: add routers for register
 
 // check routers method

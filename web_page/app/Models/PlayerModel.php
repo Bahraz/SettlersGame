@@ -1,8 +1,14 @@
 <?php
 
-if (! class_exists('DatabaseConnection')) {
-    include('../controllers/connection.php');
-}
+// if (! class_exists('DatabaseConnection')) {
+//     include('../controllers/connection.php');
+// }
+
+// use App\Controllers\PlayerController;
+
+namespace App\Models;
+
+use PDO;
 
 class PlayerModel
 {
