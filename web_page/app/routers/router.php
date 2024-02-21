@@ -10,7 +10,7 @@ $playerController = new PlayerController($databaseConnection);
 
 // $request_uri = $_SERVER['REQUEST_URI'];
 // echo $request_uri;
-//TODO: add routers for register
+//TODO: add routers for register some change
 
 // check routers method
 
