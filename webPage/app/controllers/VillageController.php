@@ -1,10 +1,11 @@
 <?php
 
-namespace Bahraz\SettlersOnline\app\controllers;
+
+namespace Bahraz\SettlersOnline\controllers;
 
 // include('../models/VillageModel.php');
 
-use Bahraz\SettlersOnline\app\models\VillageModel;
+use Bahraz\SettlersOnline\models\VillageModel;
 
 class VillageController
 {

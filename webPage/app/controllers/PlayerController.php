@@ -1,14 +1,15 @@
 <?php
 
-namespace Bahraz\SettlersOnline\app\controllers;
+namespace Bahraz\SettlersOnline\controllers;
 
-use Bahraz\SettlersOnline\app\models\PlayerModel;
-use Bahraz\SettlersOnline\app\controllers\VillageController;
+use Bahraz\SettlersOnline\models\PlayerModel;
+use Bahraz\SettlersOnline\controllers\VillageController;
+// use Bahraz\SettlersOnline\controllers\DatabaseConnection;
 
-// include('../models/PlayerModel.php');
-// include('../controllers/VillageController.php');
 
-// $villageController = new VillageController($databaseConnection);
+
+
+$villageController = new VillageController($databaseConnection);
 
 
 class PlayerController
