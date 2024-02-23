@@ -1,8 +1,12 @@
 <?php
 
-if (! class_exists('DatabaseConnection')) {
-    include('../controllers/connection.php');
-}
+// if (! class_exists('DatabaseConnection')) {
+//     include('../controllers/connection.php');
+// }
+namespace Bahraz\SettlersOnline\models;
+
+use PDO;
+use Bahraz\SettlersOnline\controllers\DatabaseConnection;
 
 class VillageModel
 {
@@ -12,7 +16,7 @@ class VillageModel
     {
         $this->connection = $databaseConnection->getConnection();
     }
- public function checkPlayerHasVillage($idPlayer)
+    public function checkPlayerHasVillage($idPlayer)
     {
         $checkPlayerHasVillage = $this->connection->prepare('SELECT * FROM village WHERE id_player = :pdo_idplayer');
         $checkPlayerHasVillage->bindParam(':pdo_idplayer', $idPlayer, PDO::PARAM_STR);
@@ -24,7 +28,7 @@ class VillageModel
     public function checkVillageCoordinates($coordX, $coordY)
     {
         //checking village with coord X&Y exist
-        $checkVillageCoordinates = $this->connection->prepare('SELECT * FROM village WHERE village_x = '.$coordX.' AND village_y = '.$coordY.'');
+        $checkVillageCoordinates = $this->connection->prepare('SELECT * FROM village WHERE village_x = ' . $coordX . ' AND village_y = ' . $coordY . '');
         $checkVillageCoordinates->execute();
         $num_rows = $checkVillageCoordinates->rowCount();
 

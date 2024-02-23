@@ -1,9 +1,0 @@
-{
-    "autoload": {
-        "psr-4": {
-            "Models\\": "app/models/",
-            "Controllers\\": "app/controllers/"
-        },
-        "files": ["app/controllers/connection.php"]
-    }
-}

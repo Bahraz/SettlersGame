@@ -1,7 +1,14 @@
 <?php
 
-include('../models/PlayerModel.php');
-include('../controllers/VillageController.php');
+namespace Bahraz\SettlersOnline\controllers;
+
+use Bahraz\SettlersOnline\models\PlayerModel;
+use Bahraz\SettlersOnline\controllers\VillageController;
+// use Bahraz\SettlersOnline\controllers\DatabaseConnection;
+
+
+
+
 $villageController = new VillageController($databaseConnection);
 
 
@@ -94,7 +101,7 @@ class PlayerController
                     global $villageController;
                     $createVillage = $villageController->createNewVillage($idPlayer);
 
-                    
+
                     if ($createVillage == true) {
 
                         header('Location: ../views/pages/game.php');
