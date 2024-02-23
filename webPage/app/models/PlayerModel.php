@@ -1,9 +1,12 @@
 <?php
 
-if (! class_exists('DatabaseConnection')) {
-    include('../controllers/connection.php');
-}
+// if (! class_exists('DatabaseConnection')) {
+//     include('../controllers/connection.php');
+// }
+namespace Bahraz\SettlersOnline\app\models;
 
+use PDO;
+use Bahraz\SettlersOnline\app\controllers\DatabaseConnection;
 
 class PlayerModel
 {

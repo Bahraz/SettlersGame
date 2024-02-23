@@ -3,5 +3,6 @@
         "psr-4": {
             "Bahraz\\SettlersOnline\\": "app/"
         }
+
     }
 }

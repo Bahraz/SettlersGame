@@ -2,7 +2,7 @@
 
 //TODO: Fix recaptcha in the future.
 // require_once('../app/Controllers/recaptcha.php');
-include('../app/routers/router.php');
+// include('../app/routers/router.php');
 
 
 session_start();

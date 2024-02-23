@@ -1,71 +1,77 @@
 <?php
 
-$requestUri = $_SERVER["REQUEST_URI"];
-// echo $requestUri;
+namespace Bahraz\SettlersOnline;
 
-if (strpos($requestUri, "index.php") !== false) {
-} else {
-    // echo $requestUri;
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+use Bahraz\SettlersOnline\app\controllers\PlayerController;
 
-        $playerControllerPath = "../controllers/PlayerController.php";
-        include($playerControllerPath);
-        $playerController = new PlayerController($databaseConnection);
 
-        if (strpos($requestUri, "/login") !== false) {
 
-            if (isset($_POST['login']) && isset($_POST['password'])) {
-                $login = htmlspecialchars($_POST['login']);
-                $password = $_POST['password'];
-                $playerController->loginPlayer($login, $password);
-            }
-            // if (isset($_POST['action'])) {
-            //     $action = $_POST['action'];
+$playerController = new PlayerController($databaseConnection);
 
-            //     // switch ($action) {
-            //     //     case 'loginPlayer':
-            //     //         if (isset($_POST['login']) && isset($_POST['password'])) {
-            //     //             $login = htmlspecialchars($_POST['login']);
-            //     //             $password = $_POST['password'];
-            //     //             $playerController->loginPlayer($login, $password);
-            //     //         }
-            //     //         break;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            //     //     case 'registerPlayer':
+    //     if (isset($_POST['action'])) {
+    //         $action = $_POST['action'];
+    if (isset($_POST['action'])) {
+        $action = $_POST['action'];
 
-            //     //         if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['regulations'])) {
+        //         switch ($action) {
+        //             case 'loginPlayer':
+        //                 if (isset($_POST['login']) && isset($_POST['password'])) {
+        //                     $login = htmlspecialchars($_POST['login']);
+        //                     $password = $_POST['password'];
+        //                     $playerController->loginPlayer($login, $password);
+        //                 }
+        //                 break;
+        switch ($action) {
+            case 'loginPlayer':
+                if (isset($_POST['login']) && isset($_POST['password'])) {
+                    // $playerController = new PlayerController($databaseConnection);
+                    $login = htmlspecialchars($_POST['login']);
+                    $password = $_POST['password'];
+                    $playerController->loginPlayer($login, $password);
+                }
+                break;
 
-            //     //             $login = htmlspecialchars($_POST['login']);
-            //     //             $password = $_POST['password'];
-            //     //             $email = $_POST['email'];
-            //     //             $regulations = isset($_POST['regulations']);
-            //     //             $verifiedEmail = false;
-            //     //             $creationDate = date('Ymd');
+            //             case 'registerPlayer':
 
-            //     //             $playerController->registerPlayer($login, $password, $email, $regulations, $verifiedEmail, $creationDate);
-            //     //         }
-            //     //         break;
+            //                 if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['regulations'])) {
 
-            //     //     case 'logoutPlayer':
-            //     //         $playerController->logoutPlayer();
-            //     //         break;
-            //     // }
+            //                     $login = htmlspecialchars($_POST['login']);
+            //                     $password = $_POST['password'];
+            //                     $email = $_POST['email'];
+            //                     $regulations = isset($_POST['regulations']);
+            //                     $verifiedEmail = false;
+            //                     $creationDate = date('Ymd');
+
+            //                     $playerController->registerPlayer($login, $password, $email, $regulations, $verifiedEmail, $creationDate);
+            //                 }
+            //                 break;
+
+            //             case 'logoutPlayer':
+            //                 $playerController->logoutPlayer();
+            //                 break;
+            //         }
+            //     }
             // }
-        } else if (strpos($requestUri, '/register') !== false) {
-            if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['regulations'])) {
+            case 'registerPlayer':
 
-                $login = htmlspecialchars($_POST['login']);
-                $password = $_POST['password'];
-                $email = $_POST['email'];
-                $regulations = isset($_POST['regulations']);
-                $verifiedEmail = false;
-                $creationDate = date('Ymd');
+                if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['regulations'])) {
 
-                $playerController->registerPlayer($login, $password, $email, $regulations, $verifiedEmail, $creationDate);
-            }
-        } else if (strpos($requestUri, '/logout') !== false) {
-            $playerController->logoutPlayer();
+                    $login = htmlspecialchars($_POST['login']);
+                    $password = $_POST['password'];
+                    $email = $_POST['email'];
+                    $regulations = isset($_POST['regulations']);
+                    $verifiedEmail = false;
+                    $creationDate = date('Ymd');
 
+                    $playerController->registerPlayer($login, $password, $email, $regulations, $verifiedEmail, $creationDate);
+                }
+                break;
+
+            case 'logoutPlayer':
+                $playerController->logoutPlayer();
+                break;
         }
     }
 }
@@ -74,3 +80,4 @@ if (strpos($requestUri, "index.php") !== false) {
 // TODO: add routers for register some change
 
 // check routers method
+

@@ -1,6 +1,10 @@
 <?php
 
-include('../models/VillageModel.php');
+namespace Bahraz\SettlersOnline\app\controllers;
+
+// include('../models/VillageModel.php');
+
+use Bahraz\SettlersOnline\app\models\VillageModel;
 
 class VillageController
 {
@@ -8,7 +12,7 @@ class VillageController
 
     public function __construct($villageModel = null)
     {
-            $this->villageModel = new VillageModel($villageModel);
+        $this->villageModel = new VillageModel($villageModel);
     }
 
     public function villageCoordinateDraw()
@@ -34,7 +38,7 @@ class VillageController
 
     public function createNewVillage($idPlayer)
     {
-        
+
         $hasVillage = $this->checkPlayerHasVillage($idPlayer);
         if (! $hasVillage) {
             do {
