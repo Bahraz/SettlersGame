@@ -1,7 +1,7 @@
 {
     "autoload": {
         "psr-4": {
-            "Bahraz\\SettlersOnline\\": "./app"
+            "Bahraz\\SettlersOnline\\": "app/"
         }
 
     }

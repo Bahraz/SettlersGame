@@ -4,10 +4,6 @@ namespace Bahraz\SettlersOnline\controllers;
 
 use Bahraz\SettlersOnline\models\PlayerModel;
 use Bahraz\SettlersOnline\controllers\VillageController;
-// use Bahraz\SettlersOnline\controllers\DatabaseConnection;
-
-
-
 
 $villageController = new VillageController($databaseConnection);
 
