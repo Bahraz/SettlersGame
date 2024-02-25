@@ -1,8 +1,25 @@
 <?php
+use Bahraz\SettlersOnline\Router;
 
 //TODO: Fix recaptcha in the future.
 // require_once('../app/Controllers/recaptcha.php');
-// include('../app/routers/router.php');
+
+// $router = include('../app/routers/router.php');
+// $requestPath = $_SERVER['REQUEST_URI'];
+
+// $match= $router->match($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+
+// $controller = new $match[0](); 
+// $controller->$match[1]();
+
+// $match= $router->match($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
+
+// $$controller = new $match[0](); 
+// $controller->$match[1]();
+
+// // require_once('../app/routers/router.php');
+
+// $router = new Router();
 
 
 session_start();
