@@ -5,24 +5,25 @@ namespace Bahraz\SettlersOnline\controllers;
 use PDO;
 use PDOException;
 
-// $servername = "mysql";
-// $database = "settlers_db";
-// $dbUsername = "db_settlers_user";
-// $dbPassword = "Test123";
+$servername = "mysql";
+$database = "settlers_db";
+$dbUsername = "db_settlers_user";
+$dbPassword = "Test123";
 
 class DatabaseConnection
 {
     private $connection;
 
-    // private $servername = "mysql";
-    // private $database = "settlers_db";
-    // private $dbUsername = "db_settlers_user";
-    // private $dbPassword = "Test123";
+    private $servername = "mysql";
+    private $database = "settlers_db";
+    private $dbUsername = "db_settlers_user";
+    private $dbPassword = "Test123";
 
-    public function __construct($servername, $database, $dbUsername, $dbPassword)
+    public function __construct($servername,$database,$dbUsername,$dbPassword)
     {
         try {
             $this->connection = new PDO("mysql:host=$servername;dbname=$database", $dbUsername, $dbPassword);
+            // $this->connection = new PDO("mysql:host=$this->servername;dbname=$this->database", $this->dbUsername, $this->dbPassword);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo "Błąd połączenia z bazą danych: " . $e->getMessage();
