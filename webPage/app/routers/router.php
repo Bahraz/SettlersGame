@@ -2,10 +2,15 @@
 
 namespace Bahraz\SettlersOnline\router;
 
+require_once('../../vendor/autoload.php');
+
 // require_once("../controllers/connection.php");
 
 use Bahraz\SettlersOnline\controllers\DatabaseConnection;
 use Bahraz\SettlersOnline\controllers\PlayerController;
+
+
+$databaseConnection = new DatabaseConnection($servername, $database, $dbUsername, $dbPassword);
 
 $player = new PlayerController($databaseConnection);
 
