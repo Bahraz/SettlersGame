@@ -1,5 +1,9 @@
 <?php
-use Bahraz\SettlersOnline\Router;
+namespace Bahraz\SettlersOnline;
+
+// require_once('./vendor/autoload.php');
+
+// use Bahraz\SettlersOnline\Router;
 
 //TODO: Fix recaptcha in the future.
 // require_once('../app/Controllers/recaptcha.php');

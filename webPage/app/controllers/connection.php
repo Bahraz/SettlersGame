@@ -14,10 +14,10 @@ class DatabaseConnection
 {
     private $connection;
 
-    private $servername = "mysql";
-    private $database = "settlers_db";
-    private $dbUsername = "db_settlers_user";
-    private $dbPassword = "Test123";
+    // private $servername = "mysql";
+    // private $database = "settlers_db";
+    // private $dbUsername = "db_settlers_user";
+    // private $dbPassword = "Test123";
 
     public function __construct($servername,$database,$dbUsername,$dbPassword)
     {
