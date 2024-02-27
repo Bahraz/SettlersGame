@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Bahraz\\SettlersOnline\\' => array($baseDir . '/app'),
+    'Bahraz\\' => array($baseDir . '/webPage'),
 );
