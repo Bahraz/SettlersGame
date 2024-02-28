@@ -1,0 +1,10 @@
+{
+    "config": {
+        "vendor-dir": "webPage/vendor/"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bahraz\\SettlersGame\\": "webPage/src/"
+        }
+    }
+}
