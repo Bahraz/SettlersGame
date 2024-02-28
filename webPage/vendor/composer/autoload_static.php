@@ -9,14 +9,14 @@ class ComposerStaticInitd751713988987e9331980363e24189ce
     public static $prefixLengthsPsr4 = array (
         'B' => 
         array (
-            'Bahraz\\' => 7,
+            'Bahraz\\SettlersGame\\' => 20,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Bahraz\\' => 
+        'Bahraz\\SettlersGame\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/webPage',
+            0 => __DIR__ . '/../../..' . '/webPage/src',
         ),
     );
 

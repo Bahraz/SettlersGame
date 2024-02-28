@@ -1,6 +1,6 @@
 <?php
 
-namespace Bahraz\Views\Components;
+namespace Bahraz\SettlersGame\views\components;
 
 class HeaderViews
 {

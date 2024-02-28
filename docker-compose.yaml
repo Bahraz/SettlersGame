@@ -1,0 +1,41 @@
+version: '3'
+services:
+
+  # PHP App
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    container_name: settlersgame_page
+    working_dir: /var/www/html
+    volumes:
+      - ./webPage:/var/www/html
+      - ./apache-config.conf:/etc/apache2/sites-available/000-default.conf
+    depends_on:
+      - mysql
+    ports:
+      - "8080:80"  # Mapowanie portu 8080 na hosta
+
+  # MySQL Database
+  mysql:
+    image: mysql:latest
+    container_name: settlersgame_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ZAQ!2wsx
+      MYSQL_DATABASE: settlersgame_db
+      MYSQL_USER: db_settlersgame_user
+      MYSQL_PASSWORD: Test123
+    ports:
+      - "3306:3306"  # Mapowanie portu 3306 na hosta
+
+  # PHPMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: settlersgame_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: ZAQ!2wsx
+    depends_on:
+      - mysql
+    ports:
+      - "8081:80"  # Mapowanie portu 8081 na hosta
