@@ -5,12 +5,12 @@ services:
   backend:
     build:
       context: .
-      dockerfile: Dockerfile  
+      dockerfile: ./docker/httpd/Dockerfile
     container_name: settlersgame_page
     working_dir: /var/www/html
     volumes:
-      - ./webPage:/var/www/html
-      - ./apache-config.conf:/etc/apache2/sites-available/000-default.conf
+      - .:/var/www/html:cached
+      - ./docker/httpd/apache-config.conf:/etc/apache2/sites-available/000-default.conf
     depends_on:
       - mysql
     ports:

@@ -7,5 +7,6 @@ require_once __DIR__ . '/../vendor/autoload.php';
 // $test = new HeaderViews;
 
 // $test->displayHeader();
+echo (new \Bahraz\SettlersGame\Views\Components\HeaderViews)->displayHeader();
 
 print_r(get_declared_classes());
