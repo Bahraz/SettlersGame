@@ -1,14 +1,16 @@
 <?php
 
 
-echo (new \Bahraz\SettlersGame\Views\Components\ShowHeader)->displayHeader();
+// echo (new \Bahraz\SettlersGame\Views\Components\ShowHeader)->displayHeader();
 
-// print_r(get_declared_classes());
+echo (new \Bahraz\SettlersGame\Views\Auth\ShowLoginForm)->displayLoginForm();
 
-
-
-// print_r($_ENV);
+// echo (new \Bahraz\SettlersGame\Views\Components\ShowFooter)->displayFooter();
 
 
-$zmiennaEnv = $_ENV['TEST_KEY'];
-echo $zmiennaEnv;
+// $url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : [];
+echo '<br/><br/><br/>';
+
+
+print_r($_SERVER['REQUEST_URI']);
+
