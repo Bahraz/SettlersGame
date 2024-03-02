@@ -9,7 +9,7 @@ class ShowLoginForm
     {
 
         echo <<<END
-        <form action='../src/routes.php?action=login' method='POST' id='loginForm'>
+        <form action='../src/routes.php' method='POST' id='loginForm'>
         Login:<br/><input type='text' name='login' />
         END;
         if (isset($_SESSION['eLogin'])) {
