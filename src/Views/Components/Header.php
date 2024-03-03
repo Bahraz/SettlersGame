@@ -2,7 +2,7 @@
 
 namespace Bahraz\SettlersGame\Views\Components;
 
-class ShowHeader
+class Header
 {
     public function displayHeader()
     {

@@ -1,19 +1,14 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../src/routes.php';
+require_once __DIR__ . '/../src/Router.php';
 
-use Bahraz\SettlersGame\Routes;
+use Bahraz\SettlersGame\Router;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/../');
 $dotenv->load();
 
-$requesUri = $_SERVER['REQUEST_URI'];
-
-// $urlParts=explode('?',$requestUri);
-$path = isset($urlParts[0])?$urlParts[0]:'/';
-
-$router = new Routes();
-
+$router = new Router();
+$match=$router->match($_SERVER['REQUEST_URI'],$_SERVER['REQUEST_METHOD']);
 
 include('../src/Views/Home/Home.php');
