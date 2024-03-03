@@ -2,7 +2,7 @@
 
 namespace Bahraz\SettlersGame\Views\Components;
 
-class ShowFooter
+class Footer
 {
     public function displayFooter()
     {

@@ -1,11 +1,17 @@
 <?php
 
 
-// echo (new \Bahraz\SettlersGame\Views\Components\ShowHeader)->displayHeader();
+echo (new \Bahraz\SettlersGame\Views\Components\Header)->displayHeader();
 
-echo (new \Bahraz\SettlersGame\Views\Auth\ShowLoginForm)->displayLoginForm();
-
-// echo (new \Bahraz\SettlersGame\Views\Components\ShowFooter)->displayFooter();
+if (isset($_GET['action'])){
+    if($_GET['action']==='register'){
+        echo (new \Bahraz\SettlersGame\Views\Auth\RegisterForm)->displayRegisterForm(); 
+    } elseif ($_GET['action']==='login'){
+        echo (new \Bahraz\SettlersGame\Views\Auth\LoginForm)->displayLoginForm();
+    }
+}else{
+    echo (new \Bahraz\SettlersGame\Views\Auth\LoginForm)->displayLoginForm();
+}
 
 
 // $url = isset($_SERVER['PATH_INFO']) ? explode('/', ltrim($_SERVER['PATH_INFO'], '/')) : [];
