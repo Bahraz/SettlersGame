@@ -11,6 +11,7 @@ services:
     volumes:
       - .:/var/www/html:cached
       - ./docker/httpd/apache-config.conf:/etc/apache2/sites-available/000-default.conf
+      - ./docker/httpd/.htaccess:/var/www/html/.htaccess
     depends_on:
       - mysql
     ports:
